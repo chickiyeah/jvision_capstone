@@ -18,7 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import egovframework.yakbang.service.UserService;
 import egovframework.yakbang.service.vo.UserVO;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
+@Tag(name = "YakbangUser", description = "약방 사용자 API")
 @RestController
 @RequestMapping("/yakbang/api/user")
 public class YakbangUserController {
@@ -26,6 +29,7 @@ public class YakbangUserController {
     @Resource(name = "userService")
     private UserService userService;
 
+    @Operation(summary = "사용자 등록", description = "신규 사용자를 등록합니다.")
     @PostMapping("/register")
     public Map<String, Object> registerUser(@RequestBody UserVO userVO) throws Exception {
         Map<String, Object> resultMap = new HashMap<>();
@@ -34,6 +38,7 @@ public class YakbangUserController {
         return resultMap;
     }
 
+    @Operation(summary = "아이디 중복 체크", description = "사용자 아이디 중복 여부를 확인합니다.")
     @GetMapping("/check-id")
     public Map<String, Object> checkDuplicateId(@RequestParam("loginId") String loginId) throws Exception {
         Map<String, Object> resultMap = new HashMap<>();
@@ -43,6 +48,7 @@ public class YakbangUserController {
         return resultMap;
     }
 
+    @Operation(summary = "로그인", description = "사용자 로그인을 처리합니다.")
     @PostMapping("/login")
     public Map<String, Object> login(@RequestBody UserVO userVO) throws Exception {
         Map<String, Object> resultMap = new HashMap<>();
@@ -58,6 +64,7 @@ public class YakbangUserController {
         return resultMap;
     }
 
+    @Operation(summary = "프로필 수정", description = "사용자 프로필 정보를 수정합니다.")
     @PutMapping("/profile")
     public Map<String, Object> updateUserProfile(@RequestBody UserVO userVO) throws Exception {
         Map<String, Object> resultMap = new HashMap<>();
@@ -66,6 +73,7 @@ public class YakbangUserController {
         return resultMap;
     }
 
+    @Operation(summary = "사용자 삭제", description = "사용자 계정을 삭제합니다.")
     @DeleteMapping("/{userId}")
     public Map<String, Object> deleteUser(@PathVariable("userId") int userId) throws Exception {
         Map<String, Object> resultMap = new HashMap<>();

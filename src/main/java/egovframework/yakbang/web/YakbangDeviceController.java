@@ -17,7 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 import egovframework.yakbang.service.DeviceService;
 import egovframework.yakbang.service.vo.ClinicalLogVO;
 import egovframework.yakbang.service.vo.DeviceVO;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
+@Tag(name = "YakbangDevice", description = "약방 디바이스 API")
 @RestController
 @RequestMapping("/yakbang/api/device")
 public class YakbangDeviceController {
@@ -25,6 +28,7 @@ public class YakbangDeviceController {
     @Resource(name = "deviceService")
     private DeviceService deviceService;
 
+    @Operation(summary = "디바이스 상세 조회", description = "사용자의 디바이스 상세 정보를 조회합니다.")
     @GetMapping("/{userId}")
     public Map<String, Object> getUserDeviceDetail(@PathVariable("userId") int userId) throws Exception {
         Map<String, Object> resultMap = new HashMap<>();
@@ -40,6 +44,7 @@ public class YakbangDeviceController {
         return resultMap;
     }
 
+    @Operation(summary = "디바이스 등록", description = "신규 디바이스를 등록합니다.")
     @PostMapping("/register")
     public Map<String, Object> registerDevice(@RequestBody DeviceVO deviceVO) throws Exception {
         Map<String, Object> resultMap = new HashMap<>();
@@ -48,6 +53,7 @@ public class YakbangDeviceController {
         return resultMap;
     }
 
+    @Operation(summary = "디바이스 상태 업데이트", description = "디바이스의 상태 정보를 업데이트합니다.")
     @PutMapping("/status")
     public Map<String, Object> updateDeviceStatus(@RequestBody DeviceVO deviceVO) throws Exception {
         Map<String, Object> resultMap = new HashMap<>();
@@ -56,6 +62,7 @@ public class YakbangDeviceController {
         return resultMap;
     }
 
+    @Operation(summary = "임상 로그 등록", description = "디바이스의 임상 로그를 등록합니다.")
     @PostMapping("/log")
     public Map<String, Object> addClinicalLog(@RequestBody ClinicalLogVO logVO) throws Exception {
         Map<String, Object> resultMap = new HashMap<>();
